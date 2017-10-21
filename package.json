@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Alicehappy/NodejsProgramming#readme",
   "dependencies": {
-    "echarts": "^3.7.2"
+    "echarts": "^3.7.2",
+    "ws": "^3.2.0"
   }
 }
