@@ -1,21 +1,34 @@
-const WebSocket = require('ws');
+const http = require('http').createServer(router),
+      fs = require('fs'),
+      ws = require('ws');
 
-const ws = new WebSocket('ws://localhost:9001');
 
-ws.on('open', function open() {
-<<<<<<< HEAD
-  const array = new Float32Array(5);
+// Websocket server => Listen and serve the websocket server
+const wss = new ws.Server({ port: 9001 });
+const dir = __dirname;
 
-  for (var i=0; i<array.length; ++i) {
-    array[i] = i/2;
+http.listen(9000);
+
+function router(req, resp, route = req.url) {
+  if (route == '/') {
+    return serveIndex(req,resp);
   }
+}
 
-  ws.send(array);
-=======
-  ws.send('something');
-});
+const page = {
+  index:  fs.readFileSync(dir+'/index.html'),
+};
 
-ws.on('message', function incoming(data) {
-  console.log(data);
->>>>>>> 0abb86cb4b2b77dc7b9175965253e766567bd247
+const serveIndex = (req, resp) => {
+  resp.writeHeader(200, {'Content-Type': 'text/html'});
+  resp.write(page.index);
+  resp.end();
+};
+
+wss.on('connection', function connection(ws){
+  ws.on('message', function incoming(message) {
+    console.log('received: %s', message);
+  });
+
+  ws.send("something");
 });

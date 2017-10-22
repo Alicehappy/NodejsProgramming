@@ -1,55 +1,22 @@
 <!DOCTYPE HTML>
 <html>
    <head>
-
-      <script type="text/javascript">
-         function WebSocketTest()
-         {
-            if ("WebSocket" in window)
-            {
-               alert("WebSocket is supported by your Browser!");
-
-               // Let us open a web socket
-               var ws = new WebSocket("ws://localhost:9998/echo");
-
-               ws.onopen = function()
-               {
-                  // Web Socket is connected, send data using send()
-                  ws.send("Message to send");
-                  alert("Message is sent...");
-               };
-
-               ws.onmessage = function (evt)
-               {
-                  var received_msg = evt.data;
-                  alert("Message is received...");
-               };
-
-               ws.onclose = function()
-               {
-                  // websocket is closed.
-                  alert("Connection is closed...");
-               };
-
-               window.onbeforeunload = function(event) {
-                  socket.close();
-               };
-            }
-
-            else
-            {
-               // The browser doesn't support WebSocket
-               alert("WebSocket NOT supported by your Browser!");
-            }
-         }
-      </script>
-
+     <title>WebSocket</title>
    </head>
    <body>
+     <script>
+     var socket = new WebSocket('ws://localhost:9001');
+     socket.onopen = function(){
+       socket.send('Message to send: Ping');
+       alert("Message is sent ...");
+     };
 
-      <div id="sse">
-         <a href="javascript:WebSocketTest()">Run WebSocket</a>
-      </div>
+     socket.onmessage = function(evt) {
+       var received_msg = evt;
+       alert("Message is received...");
+     };
+
+     </script>
 
    </body>
 </html>
@@ -65,19 +32,10 @@
 </html>
 
 <body>
-<<<<<<< HEAD
-=======
-    <!-- preparing a DOM with width and height for ECharts -->
->>>>>>> 0abb86cb4b2b77dc7b9175965253e766567bd247
     <div id="main" style="width: 600px;height:400px;"><p> The app is working! ^_^</p></div>
 
 </body>
 
-
-<<<<<<< HEAD
-=======
-<!--
->>>>>>> 0abb86cb4b2b77dc7b9175965253e766567bd247
 
 <script type="text/javascript">
         // based on prepared DOM, initialize echarts instance
